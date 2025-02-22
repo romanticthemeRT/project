@@ -18,13 +18,13 @@ class CommFactory:
 
     @classmethod
     def create(
-        cls,
-        backend: str,
-        rank: int,
-        world_size: int,
-        master_addr: str,
-        master_port: int,
-        auto_device: bool = False
+            cls,
+            backend: str,
+            rank: int,
+            world_size: int,
+            master_addr: str,
+            master_port: int,
+            auto_device: bool = False
     ) -> BaseComm:
         with cls._init_lock:
             if dist.is_initialized():
@@ -41,19 +41,21 @@ class CommFactory:
                     rank=rank,
                     world_size=world_size,
                     init_method=f"tcp://{master_addr}:{master_port}",
-                    timeout=timedelta(seconds=10)  # 添加超时设置
+                    timeout=timedelta(seconds=10)
                 )
                 cls._initialized = True
                 logger.info("Distributed process group initialized")
 
-        device = 'cuda' if torch.cuda.is_available() and auto_device else 'cpu'
         if backend == 'gloo':
+            device = 'cpu'  
             comm = GlooComm(rank, world_size, device=device)
-            logger = setup_logger(rank)
             logger.info(f"Created GlooComm with device {device}")
-            return comm
         else:
             raise ValueError(f"Unsupported backend: {backend}")
+
+        return comm
+
+
 
 
 

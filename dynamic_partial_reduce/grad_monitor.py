@@ -32,7 +32,7 @@ class GradientProfiler:
         """
         if grad is not None:
             self.grad_data[name] = grad.clone().to(self.device)
-            self.logger.info(f" Captured gradient for parameter {name}")
+            self.logger().info(f"Captured gradient for parameter {name}")
 
     def release(self):
         """
@@ -41,7 +41,7 @@ class GradientProfiler:
         for hook in self.hooks:
             hook.remove()
         self.grad_data.clear()
-        self.logger.info("所有梯度钩子已释放")
+        self.logger().info("所有梯度钩子已释放")
 
     def logger(self):
         """

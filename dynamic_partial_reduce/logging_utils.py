@@ -22,3 +22,4 @@ def setup_logger(rank: int, log_dir: str = "logs", log_level: int = logging.INFO
     logger.addHandler(handler)
     return logger
 
+

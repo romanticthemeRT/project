@@ -80,10 +80,11 @@ class ConditionBuilder:
             @torch.jit.script_method
             def _safe_get_grad(self, x: torch.Tensor) -> torch.Tensor:
                 # 确保 x.grad 始终是一个张量
-                if x.grad is None:
-                    return torch.zeros_like(x, memory_format=torch.preserve_format)
-                if not torch.is_grad_enabled():
+                if not torch.is_grad_enabled() or x.grad is None:
                     return torch.zeros_like(x, memory_format=torch.preserve_format)
                 return x.grad.detach()
 
         return GradCheck(grad_thresh)
+
+
+
