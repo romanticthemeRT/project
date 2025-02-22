@@ -41,7 +41,7 @@ class CommFactory:
                     rank=rank,
                     world_size=world_size,
                     init_method=f"tcp://{master_addr}:{master_port}",
-                    timeout=timedelta(seconds=10)  # 添加超时设置
+                    timeout=timedelta(seconds=10)
                 )
                 cls._initialized = True
                 logger.info("Distributed process group initialized")

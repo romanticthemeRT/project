@@ -106,7 +106,7 @@ class BaseComm(ABC):
         required_size = mask.sum().item()
 
         with torch.no_grad():
-            # 启用CUDA异步加速（如果可用）
+            # 启用CUDA异步加速
             device = mask.device
             if key not in self._index_cache or self._index_cache[key].size(0) < required_size:
                 new_size = max(int(required_size * 1.5), 1024)  # 按1.5倍扩容
