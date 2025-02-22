@@ -12,5 +12,9 @@ This project aims to design and implement a dynamic partial reduce operation as 
 ## Installation
 1. Clone the repository:
    ```bash
-   git clone [https://github.com/yourusername/efficient_partial_reduce.git](https://github.com/romanticthemeRT/project)
-   cd efficient_partial_reduce
+   git clone https://github.com/romanticthemeRT/project
+Create and activate a virtual environment:
+
+<BASH>
+conda create -n pytorch2.2.2 python=3.9
+conda activate pytorch2.2.2
